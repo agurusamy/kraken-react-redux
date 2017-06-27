@@ -6,36 +6,6 @@ import ArtistDetail from '../public/components/artists/ArtistDetail';
 import ArtistCreate from '../public/components/artists/ArtistCreate';
 import ArtistEdit from '../public/components/artists/ArtistEdit';
 
-
-const componentRoutes = {
-  component: Home,
-  path: '/',
-  indexroute: { component: ArtistMain },
-  childRoutes: [
-      {
-          path: 'artists/new',
-          getComponent(location, cb) {
-              System.import('../public/components/artists/ArtistCreate')
-                .then(module => cb(null, module.default));
-          }
-      },
-      {
-          path: 'artists/:id',
-          getComponent(location, cb) {
-              System.import('../public/components/artists/ArtistDetail')
-                .then(module => cb(null, module.default));
-          }
-      },
-      {
-          path: 'artists/:id/edit',
-          getComponent(location, cb) {
-              System.import('../public/components/artists/ArtistEdit')
-                .then(module => cb(null, module.default));
-          }
-      }
-  ]
-};
-
 const Routes = createRoutes(
     <Router history={hashHistory} >
         <Route path="/" component={Home}>

@@ -11,9 +11,9 @@ module.exports = React.createClass({
             <html>
 			    <head>
                     <meta charSet="UTF-8"/>
-                    <link href="css/style.css" rel="stylesheet" type="text/css" />
-                    <link href="css/materialize.css" rel="stylesheet" type="text/css" />
-                    <link href="css/react-range.css" rel="stylesheet" type="text/css" />
+                    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+                    <link href="/css/materialize.css" rel="stylesheet" type="text/css" />
+                    <link href="/css/react-range.css" rel="stylesheet" type="text/css" />
                     <title>Music</title>
 				</head>
 			    <body>
