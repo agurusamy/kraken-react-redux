@@ -1,14 +1,14 @@
 {
-  "name": "MusicApp",
-  "version": "1.0.0",
-  "description": "",
+  "name": "AsokumarGurusamy",
+  "version": "1.0.1",
+  "description": "A web application using kraken, react-engine react and redux",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && webpack"
   },
-  "repository": "",
-  "author": "",
+  "repository": "https://github.com/agurusamy/kraken-react-redux.git",
+  "author": "Asokumar Gurusamy",
   "license": "ISC",
   "dependencies": {
     "babel-register": "^6.24.1",
