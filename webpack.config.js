@@ -36,9 +36,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'manifest']
-    }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   names: ['vendor', 'manifest']
+    // }),
     new CopyWebpackPlugin([{
       from: 'style',
       to: '../css'
