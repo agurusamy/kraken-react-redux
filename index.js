@@ -7,7 +7,7 @@ var nodeJSX = require('node-jsx');
 // this would transpile the react router and es6 code into es5 before the server startup
 require('css-modules-require-hook/preset');
 require('babel-register')({
-    presets: ['env', 'react']
+    presets: ['babel-preset-env', 'react']
 });
 
 var options, app;
