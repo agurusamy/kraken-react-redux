@@ -13,6 +13,7 @@
   "dependencies": {
     "babel-register": "^6.24.1",
     "babel-preset-env": "^1.1.4",
+    "babel-preset-react": "^6.16.0",
     "construx": "~0.0.1",
     "construx-copier": "~0.0.1",
     "css-modules-require-hook": "^4.0.6",
@@ -36,8 +37,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.17.0",
-    "babel-loader": "^6.2.0",   
-    "babel-preset-react": "^6.16.0",
+    "babel-loader": "^6.2.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^2.1.2",
