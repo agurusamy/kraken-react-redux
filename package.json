@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && webpack",
-    "preinstall": "npm run build"
+    "build": "npm run clean && webpack"
   },
   "repository": "https://github.com/agurusamy/kraken-react-redux.git",
   "author": "Asokumar Gurusamy",
