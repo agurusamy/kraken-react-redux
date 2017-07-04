@@ -34,6 +34,14 @@ nodeJSX.install({
 });
 
 app = module.exports = express();
+if (process.env.NODE_ENV !== 'production') {
+    var webpackDevMiddleware = require('webpack-dev-middleware'),
+    webpack = require('webpack'),
+    webpackConfig = require('./webpack.config');
+
+    app.use(webpackDevMiddleware(webpack(webpackConfig)));
+}
+
 app.use(kraken(options));
 app.on('start', function () {
     console.log('Application ready to serve requests.');

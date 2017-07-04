@@ -40,7 +40,7 @@ module.exports = {
     //   names: ['vendor', 'manifest']
     // }),
     new CopyWebpackPlugin([{
-      from: 'style',
+      from: 'public/style',
       to: '../css'
     }])
   ]
