@@ -4,7 +4,7 @@
     "view engine": "jsx",
     "view": "require:react-engine/lib/expressView",
     "view cache": false,
-    "views": "path:./public/components"
+    "views": "path:./build"
   },
 
   "view engines": {
@@ -13,8 +13,9 @@
           "renderer": {
             "method": "create",
               "arguments": [{
-                  "routes": "require:./routes/router.js",
-                  "routesFilePath": "path:./routes/router.js"
+                  "routes": "require:./build/routes",
+                  "routesFilePath": "path:./build/routes",
+                  "reduxStoreInitiator": "path:./build/store"
               }]
           }
       }
@@ -22,14 +23,16 @@
 
   "middleware": {
     "static": {
+      "enabled": true,
+      "priority": 40,
+      "name": "serve-static",
       "module": {
-        "arguments": ["path:dist"]
+          "arguments": ["path:./build/public"]
+      },
+      "router": {
+        "module": {
+          "arguments": [{"directory": "path:./routes"}]
+        }
       }
-    },
-    "router": {
-      "module": {
-        "arguments": [{"directory": "path:./routes"}]
-      }
-    }
   }
 }

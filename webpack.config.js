@@ -1,47 +1,76 @@
 var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
-
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-
-// const extractTextPlugin = new ExtractTextWebpackPlugin({filename: '../css/[name].css', ignoreOrder: true });
-
-const VENDOR_LIBS = ['redux-promise', 'faker', 'lodash', 'react','redux','react-dom', 'redux-thunk', 'react-input-range']
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: {
-    bundle: './public/app.js',
-    vendor: VENDOR_LIBS
-  },
+  context: __dirname,
+  entry: './public/main.js',
   output: {
-    path: path.join(__dirname, 'dist/js'),
-    filename: '[name].js'
+    path: path.resolve('build'),
+    filename: 'bundle.js'
   },
   module: {
     rules: [
       {
-        use: 'babel-loader',
         test: /\.js$/,
+        loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
-        use: ['style-loader', 'css-loader'],
-        test: /\.css$/
+        test: /\.(css|less)$/,
+        loader: [
+          {
+            loader: 'style-loader',
+            query: {
+              sourceMap: 1
+            }
+          },
+          {
+            loader: 'css-loader',
+            query: {
+              publicPath: '../',
+              paths: [
+                path.resolve(__dirname)
+              ]
+            }
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              paths: [
+                path.resolve(__dirname)
+              ]
+            }
+          }
+        ]
       },
       {
-        use: 'html-loader',
-        test: /\.html$/
+          // do not exclude `node_modules` because of `react-intl-tel-input`
+          test: /\.png$/i,
+          loader: 'file?name=[name].[ext]'
+      },
+      {
+          test: /\.woff(2)?$/,
+          loader: 'url?limit=10000&mimetype=application/font-woff&name=[name].[ext]'
+      },
+      {
+          test: /\.ttf$/, loader: 'file?name=[name].[ext]'
+      },
+      {
+          test: /\.eot$/, loader: 'file?name=[name].[ext]'
+      },
+      {
+          test: /\.svg$/, loader: 'file?name=[name].[ext]'
       }
     ]
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.css', '.less']
+  },
   plugins: [
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   names: ['vendor', 'manifest']
-    // }),
-    new CopyWebpackPlugin([{
-      from: 'public/style',
-      to: '../css'
-    }])
+    new ExtractTextPlugin('./css/materialize.css'),
+    new ExtractTextPlugin('./css/react-range.css'),
+    new ExtractTextPlugin('./css/style.css'),
   ]
 };

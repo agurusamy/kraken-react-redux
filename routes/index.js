@@ -1,5 +1,3 @@
-import home from '../public/components/Home';
-
 export default function (router) {
 	router.get(['/*'], function (req, res) {
 		console.log("req.url: ", req.url);
