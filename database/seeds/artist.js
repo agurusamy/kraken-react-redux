@@ -1,6 +1,6 @@
-import _ from 'lodash';
-import faker from 'faker';
-import { GENRES } from '../constants';
+var  _ = require('lodash'),
+ faker = require('faker'),
+ GENRES = require('../constants').GENRES;
 
 module.exports = function() {
   return {
@@ -16,7 +16,7 @@ module.exports = function() {
     retired: faker.random.boolean(),
     albums: getAlbums()
   };
-}
+};
 
 function getAlbums() {
   return _.times(randomBetween(0, 5), () => {

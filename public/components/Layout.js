@@ -6,7 +6,7 @@ class Layout extends Component {
         <html lang='en'>
         <head>
           <title>Sample Applicaion</title>
-          <script src='bundle.js'/>
+          <script src='/bundle.js'/>
         </head>
         <body>
         <div id='app'>
@@ -17,3 +17,5 @@ class Layout extends Component {
       );
     }
 }
+
+export default Layout;

@@ -1,6 +1,7 @@
 import React from 'react';
 import routes from './routes';
 import Client from  'react-engine/lib/client';
+import store from './store';
 import './css/materialize.css';
 import './css/react-range.css';
 import './css/style.css';
@@ -10,7 +11,7 @@ let options = {
     react: React,
     routes: routes,
     reduxStoreInitiator: store,
-    viewResolver: viewName => require(`./components/${viewName}`)
+    viewResolver: viewName => require(`./views/${viewName}`)
 };
 
 (function bootLoader() {

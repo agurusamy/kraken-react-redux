@@ -1,76 +1,69 @@
-var webpack = require('webpack');
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
+const path = require('path');
 
-module.exports = {
-  context: __dirname,
-  entry: './public/main.js',
-  output: {
-    path: path.resolve('build'),
-    filename: 'bundle.js'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.(css|less)$/,
-        loader: [
-          {
-            loader: 'style-loader',
-            query: {
-              sourceMap: 1
-            }
-          },
-          {
-            loader: 'css-loader',
-            query: {
-              publicPath: '../',
-              paths: [
-                path.resolve(__dirname)
-              ]
-            }
-          },
-          {
-            loader: 'less-loader',
-            options: {
-              paths: [
-                path.resolve(__dirname)
-              ]
-            }
-          }
-        ]
-      },
-      {
-          // do not exclude `node_modules` because of `react-intl-tel-input`
-          test: /\.png$/i,
-          loader: 'file?name=[name].[ext]'
-      },
-      {
-          test: /\.woff(2)?$/,
-          loader: 'url?limit=10000&mimetype=application/font-woff&name=[name].[ext]'
-      },
-      {
-          test: /\.ttf$/, loader: 'file?name=[name].[ext]'
-      },
-      {
-          test: /\.eot$/, loader: 'file?name=[name].[ext]'
-      },
-      {
-          test: /\.svg$/, loader: 'file?name=[name].[ext]'
-      }
-    ]
-  },
-  resolve: {
-    extensions: ['.js', '.jsx', '.css', '.less']
-  },
-  plugins: [
-    new ExtractTextPlugin('./css/materialize.css'),
-    new ExtractTextPlugin('./css/react-range.css'),
-    new ExtractTextPlugin('./css/style.css'),
-  ]
+const BUILD_DIR = path.resolve(__dirname, 'dist');
+const APP_DIR = path.resolve(__dirname, 'public');
+
+const WebpackConfig = {
+
+    entry: APP_DIR + '/main.js',
+    devtool: 'source-map',
+
+    output: {
+        path: BUILD_DIR,
+        filename: 'bundle.js',
+        libraryTarget: 'umd',
+        library: 'kraken-react-redux'
+    },
+
+    module: {
+        rules: [
+            {
+                loader: 'babel-loader',
+                test: /.js$/,
+                exclude: /node_modules/,
+                include : APP_DIR,
+                options: {
+                    presets: [ 'env', 'react' ]
+                }
+            },
+            {
+                test: /\.css$/,
+                use: [{
+                    loader: "style-loader" // creates style nodes from JS strings
+                }, {
+                    loader: "css-loader" // translates CSS into CommonJS
+                }, {
+                    loader: "less-loader" // compiles Less to CSS
+                }
+        ]}]
+    },
+
 };
+
+// webpack production config.
+if ( process.env.NODE_ENV === 'production' ) {
+
+    WebpackConfig.externals = {
+        'react': 'react',
+        'react-dom': 'react-dom'
+    };
+
+    WebpackConfig.plugins = [
+        new webpack.optimize.AggressiveMergingPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            beautify: false,
+            mangle: {
+                screw_ie8: true,
+            },
+            compress: {
+                warnings: false,
+                screw_ie8: true
+            },
+            comments: false
+        }),
+    ];
+
+}
+
+module.exports = WebpackConfig;
